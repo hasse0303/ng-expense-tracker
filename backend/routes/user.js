@@ -25,7 +25,7 @@ router.post("/SIGN_UP", (req, res, next) => {
         .then((result) => {
           const token = jwt.sign(
             { gmail: req.gmail },
-            process.env.JWT_KEY,
+            "raghav_garg_first_mean_project_this_can_be_anything",
             { expiresIn: '1h' } // 1 hour
           );
           res.status(200).json({
