@@ -39,7 +39,7 @@ export class ViewExpensesComponent implements OnInit {
     public authServ:AuthService,
     public _snackBar:MatSnackBar,
   ) {this.userId=localStorage.getItem('Id')?.split(' ')[1];}
-  
+
   cards: any = [];
   allexpense:any=0;
   count:any=0;
@@ -86,7 +86,7 @@ export class ViewExpensesComponent implements OnInit {
           title: 'Number of Expenses',
           content: len,
         },
-        { icon: 'monetization_on', title: 'Total Amount', content: '₹'+this.count },
+        { icon: 'monetization_on', title: 'Total Amount', content: this.count },
       ];
       this.allexpense=len;
       this.businessData.expensesLogged=this.allexpense;
@@ -103,7 +103,7 @@ export class ViewExpensesComponent implements OnInit {
   }
 
   //logic of pie chart
-  
+
   cate:any;
   hashMap:any={};
   public pieChartData(data:any){
@@ -114,7 +114,7 @@ export class ViewExpensesComponent implements OnInit {
     if(data){
     this.businessData.onGetAllCategory().subscribe((res:any)=>{
       this.cate=res.data;
-      
+
       for(let i=0;i<this.cate.length;i++){
         this.hashMap[this.cate[i]]=0;
       }
@@ -129,8 +129,8 @@ export class ViewExpensesComponent implements OnInit {
           this.count+=this.hashMap[key];
         }
       }
-      this.cards[3].content='₹'+this.count;
-      
+      this.cards[3].content=this.count;
+
     })
   }
   }
