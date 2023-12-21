@@ -1,6 +1,51 @@
-.viewExpense{
-    margin-left: 10px;
+.summary-title {
+	margin: 0 0 16px;
+	font-size: 24px;
+  line-height: 12px;
+	text-decoration: underline;
+	text-align: center;
+	color: #1d1d55;
+	text-transform: uppercase;
 }
-.viewExpense p{
-    font-size: 1.2rem;
+
+.summary-container {
+	display: flex;
+	flex-direction: column;
+	font-size: 14px;
+	gap: 12px;
+
+	.item {
+		display: flex;
+		justify-content: space-between;
+		color: #1d1d55;
+		font-size: 16px;
+		font-weight: 500;
+	}
+
+	.value {
+		color: #4caf50;
+	}
+
+	.total {
+		font-size: 20px;
+		font-weight: 500;
+	}
+}
+
+.divider {
+  margin-bottom: 16px;
+}
+
+.mat-dialog-content {
+  overflow: unset;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .title {
+      font-weight: bold;
+  }
 }

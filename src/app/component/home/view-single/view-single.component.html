@@ -1,32 +1,36 @@
-<div style="margin-top: 30px;">
-    <div class="viewExpense"><p>Expense Details</p></div>
-    <table align="center">
-        <tr>
-            <td><b>Name : </b></td>
-            <td>{{tableData.name}}</td>
-        </tr>
-        <tr>
-            <td><b>Amount : </b></td>
-            <td>{{tableData.amount | currency}}</td>
-        </tr>
-        <tr>
-            <td><b>Expense Date :</b> </td>
-            <td>{{tableData.expense_date | date}}</td>
-        </tr>
-        <tr>
-            <td><b>Expense Category : </b></td>
-            <td>{{tableData.expense_category}}</td>
-        </tr>
-        <tr>
-            <td><b>Payment Type : </b></td>
-            <td>{{tableData.payment}}</td>
-        </tr>
-        <tr *ngIf="tableData.comment!=null && tableData.comment && tableData.comment!=''">
-            <td><b>Comment :</b> </td>
-            <td>{{tableData.comment}}</td>
-        </tr>
-    </table>
+<!-- dialog title -->
+<div mat-dialog-title>
+	<div class="summary-title">Summary</div>
 </div>
-<div mat-dialog-actions align="end">
-    <button mat-flat-button  mat-dialog-close color="primary">Ok</button>
-</div>
+<!-- dialog content -->
+<mat-dialog-content>
+  <mat-divider class="divider"></mat-divider>
+	<div class="summary-container">
+		<div class="item">
+			<span class="title">Name: </span><span class="value">{{ tableData.name }}</span>
+		</div>
+
+		<div class="item">
+			<span class="title">Amount: </span> <span class="value">{{ tableData.amount || 0 | currency }}</span>
+		</div>
+
+		<div class="item">
+			<span class="title">Expense Date: </span>
+			<span class="value">{{ tableData.expense_date | date }}</span>
+		</div>
+
+		<div class="item">
+			<span class="title">Expense Category: </span>
+			<span class="value">{{ tableData.expense_category }}</span>
+		</div>
+		<div class="item">
+			<span class="title">Payment Type: </span>
+			<span class="value">{{ tableData.payment }}</span>
+		</div>
+		<mat-divider></mat-divider>
+		<div class="item">
+			<span class="title">Comment: </span>
+			<span class="value">{{ tableData.comment }}</span>
+		</div>
+	</div>
+</mat-dialog-content>

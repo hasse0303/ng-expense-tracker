@@ -198,8 +198,10 @@ export class ViewExpensesComponent implements OnInit {
     this.businessData.onGetSingleExpense(id).subscribe((res: any) => {
       tableData=res.data;
       let dialogRef = this.dialog.open(ViewSingleComponent, {
-        width: '300px',
-        height: '250px',
+        width: '420px',
+        height: 'auto',
+        minHeight: '300px',
+        disableClose: false,
         data:{
           data:tableData,
         }
