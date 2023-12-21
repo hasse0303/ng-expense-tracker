@@ -122,7 +122,7 @@
                                   type="button"
                                 >
                               <mat-icon>visibility</mat-icon>
-                              <span>Summary</span>
+                              Summary
                           </button>
                           <button
                                   mat-menu-item
@@ -131,16 +131,17 @@
                                   type="button"
                                 >
                               <mat-icon>edit</mat-icon>
-                              <span>Edit</span>
+                              Edit
                           </button>
                           <button
                                   mat-menu-item
                                   matTooltip="Delete"
+                                  style="color: #f44336"
                                   (click)="deleteExpense(element._id)"
                                   type="button"
                                 >
-                              <mat-icon>delete</mat-icon>
-                              <span>Delete</span>
+                              <mat-icon color="warn">delete</mat-icon>
+                              Delete
                           </button>
                       </mat-menu>
                     </td>
