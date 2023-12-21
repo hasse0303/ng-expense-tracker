@@ -101,6 +101,7 @@ router.post('/SAVE_DATA',(req,res,next)=>{
   const allData=new SaveData({
     username:req.body.username,
     name:req.body.name,
+    gmail: req.body.gmail,
     firstLoginDate:req.body.firstLoginDate,
     lastLoginDate:req.body.lastLoginDate,
     userId:req.body.userId,

@@ -57,6 +57,7 @@ export class AuthService {
             firstLoginDate:res.data.UserSince,
             username:res.data.username,
             name:res.data.name,
+            gmail: res.data.gmail,
             lastLoginDate:res.data.UserSince,
             userId:res.data.userId,
             expenseLogged:0,
@@ -143,7 +144,7 @@ export class AuthService {
       // console.log(result);
     })
   }
-  
+
   updateProfile(body:any){
     let id=localStorage.getItem('Id')?.split(' ')[1];
     return this.http.post(this.apiUrl+'UPDATE_PROFILE/'+id,body);

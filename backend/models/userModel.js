@@ -8,6 +8,7 @@ const SaveData=mongoose.Schema({
   firstLoginDate:({type:String}),
   lastLoginDate:({type:String}),
   expenseLogged:({type:String}),
+  gmail:({type:String}),
   userId:({type:String}),
 });
 

@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit{
   }
   openDialog(): void {
     this.dialog.open(ProfileComponent, {
-      width: '600px',
+      width: '1200px',
     })
   }
   onView(){

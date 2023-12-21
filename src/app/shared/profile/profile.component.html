@@ -9,36 +9,68 @@
     <mat-progress-bar *ngIf="isProcess" mode="indeterminate"></mat-progress-bar>
     <mat-card-content *ngIf="!isProcess">
       <div class="liner"><p></p></div>
-      <div class="main">
-        <img
-          src="../../../assets/image/man.png"
-          alt="man image"
-          height="60px"
-          width="60px"
-        />
+      <div class="profile-container">
+        <div class="main">
+          <img
+            src="../../../assets/image/man.png"
+            alt="man image"
+            height="120px"
+            width="120px"
+          />
+          <span>@{{userInfo.username}}</span>
         </div>
-        <div class="row">
-          <div class="col-sm-6 col-xs-6 names" *ngIf="!isEdit">
-            <p>Name: {{name}}</p>
+
+          <div class="view-profile">
+            <div class="profile-row">
+              <div class="title-member">
+                 <span class="span"> Personal Info </span>
+              </div>
+              <mat-card class="content">
+                  <div class="group-item">
+                      <div class="item-g">
+                          <p class="title-info">Name</p>
+                          <p class="info" *ngIf="!isEdit">{{userInfo.name}}</p>
+                          <input *ngIf="isEdit" type="text" [value]="name" [(ngModel)]="newName" width="50%">
+                      </div>
+                      <div class="item-g">
+                          <p class="title-info">Username</p>
+                          <p class="info">{{userInfo.username}}</p>
+
+                      </div>
+                  </div>
+                  <div class="group-item">
+                      <div class="item-g">
+                          <p class="title-info">Email</p>
+                          <p class="info" *ngIf="!isEdit">{{userInfo.gmail}}</p>
+                          <input *ngIf="isEdit" type="text" [value]="gmail" [(ngModel)]="newGmail" width="50%">
+                      </div>
+                      <div class="item-g">
+                          <p class="title-info">Expense log</p>
+                          <p class="info">{{userInfo.expenseLogged}}</p>
+                      </div>
+                      <mat-divider></mat-divider>
+                  </div>
+              </mat-card>
+            </div>
+            <mat-divider style="margin-bottom: 20px;"></mat-divider>
+            <div class="profile-row">
+              <div class="title-member">
+                 <span class="span"> Logged in Info </span>
+              </div>
+              <mat-card class="content">
+                  <div class="group-item">
+                      <div class="item-g">
+                          <p class="title-info">First logged in</p>
+                          <p class="info">{{userInfo.firstLoginDate | date: 'MMM d, y, h:mm a'}}</p>
+                      </div>
+                      <div class="item-g">
+                          <p class="title-info">Last logged in</p>
+                          <p class="info">{{userInfo.lastLoginDate | date: 'MMM d, y, h:mm a'}}</p>
+                      </div>
+                  </div>
+              </mat-card>
+            </div>
           </div>
-          <div class="col-sm-6 col-xs-6 names" *ngIf="isEdit">
-            <p>Name:</p>
-            <input type="text" [value]="name" [(ngModel)]="newName">
-          </div>
-          <div class="col-sm-6 col-xs-6 names" *ngIf="!isEdit">
-            <p>UserName: {{user_name}}</p>
-          </div>
-          <div class="col-sm-6 col-xs-6 names" *ngIf="isEdit">
-            <p>UserName:</p>
-            <input type="text" [value]="name" [(ngModel)]="newUsername" width="50%">
-          </div>
-        </div>
-      <div class="row row-col-3 mains">
-        <div class="col" *ngFor="let line of lines">
-          <p style="text-align: center;font-size: 18px;
-          font-family: cursive; font-weight: bold;">{{ line.content }}</p>
-          <p style="text-align: center;font-size: 22px;">{{ !line.type ? line.text : line.text | date }}</p>
-        </div>
       </div>
     </mat-card-content>
     <div style="display:flex; flex-direction: row; justify-content: space-between;">

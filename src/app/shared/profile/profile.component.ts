@@ -17,27 +17,24 @@ export class ProfileComponent implements OnInit{
   name:any='';
   lines:any=[];
   isEdit:boolean=false;
+  userInfo: any = {};
   newName:any;
   newUsername:any;
+  newGmail: any;
+  gmail: any;
   constructor(public businessData:BusinessDataService,public authService:AuthService,public snackBar:MatSnackBar,public dialog: MatDialog){}
   ngOnInit(): void {
     this.isProcess=true;
     this.authService.getAllSaveData().subscribe((res:any)=>{
+      this.userInfo = res.data
       setTimeout(() => {
         this.isProcess=false;
         this.editable=true;
       }, 1000);
-      let firstDate=res.data.firstLoginDate;
-      let lastLogin=res.data.lastLoginDate;
-      this.lines=[
-        {content:'User Since', type: 'date', text:firstDate},
-        {content:'Expense Logged',text:res.data.expenseLogged},
-        {content:'Last Login', type: 'date', text:lastLogin},
-      ];
       this.name=res.data.name;
-      this.user_name=res.data.username;
+      this.gmail=res.data.gmail;
       this.newName=res.data.name;
-      this.newUsername=res.data.username;
+      this.newGmail=res.data.gmail;
     })
   }
   editField(){
@@ -45,7 +42,7 @@ export class ProfileComponent implements OnInit{
   }
   saveData(){
     let body={
-      username:this.newUsername,
+      gmail:this.newGmail,
       name:this.newName,
     }
     this.authService.updateProfile(body).subscribe((res:any)=>{

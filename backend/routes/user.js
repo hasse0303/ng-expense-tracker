@@ -35,6 +35,7 @@ router.post("/SIGN_UP", (req, res, next) => {
               UserSince: result.userFirstSignUp,
               username: result.username,
               name: result.name,
+              gmail: result.gmail,
               token: token,
               expiredToken: 3600,
               userId:result._id,

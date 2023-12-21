@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
   }
   openDialog(): void {
     this.dialog.open(ProfileComponent, {
-      width: '600px',
+      width: '1200px',
     });
   }
   onLogout() {

@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
     public dialog: MatDialog
   ) {}
   ngOnInit(): void {
-    
+
   }
   handleCategory(event:any){
     this.keywords=event;
@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
 
   openDialog(): void {
     this.dialog.open(ProfileComponent, {
-      width: '600px',
+      width: '1200px',
     });
   }
 
