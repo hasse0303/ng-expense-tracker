@@ -134,7 +134,9 @@ export class AddExpenseComponent implements OnInit {
   }
 
   transformExpenseDate() {
-    this.expenseForm.patchValue({expense_date: this.expenseForm.value.expense_date.toISOString()});
+    if (typeof this.expenseForm.value.expense_date !=='string') {
+      this.expenseForm.patchValue({expense_date: this.expenseForm.value.expense_date.toISOString()});
+    }
   }
   onCancel() {
     this.route.navigate(['dashboard']);
