@@ -10,10 +10,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ViewSingleComponent } from '../view-single/view-single.component';
 import { ShowChartComponent } from '../show-chart/show-chart.component';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-view-expenses',
   templateUrl: './view-expenses.component.html',
   styleUrls: ['./view-expenses.component.scss'],
+  providers: [DatePipe]
 })
 export class ViewExpensesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -38,6 +40,7 @@ export class ViewExpensesComponent implements OnInit {
     public route:Router,
     public authServ:AuthService,
     public _snackBar:MatSnackBar,
+    private datePipe: DatePipe
   ) {this.userId=localStorage.getItem('Id')?.split(' ')[1];}
 
   cards: any = [];
@@ -154,15 +157,18 @@ export class ViewExpensesComponent implements OnInit {
   onBarChartEdit(data:any){
     let hashmap:any={};
     for(let i=0;i<data.length;i++){
-      let date=data[i].expense_date.toString().split(' ');
-      hashmap[date[3]]=[];
+      let date=this.transformExpenseDate(data[i].expense_date)?.toString().split('/');
+      date && (hashmap[date[2]]=[]);
     }
     for(let i=0;i<data.length;i++){
-      let date=data[i].expense_date.toString().split(' ');
-      hashmap[date[3]].push([date[1],data[i].amount]);
+      let date=this.transformExpenseDate(data[i].expense_date)?.toString().split('/');
+      date && hashmap[date[2]].push([date[1],data[i].amount]);
     }
     this.businessData.hashmap=hashmap;
-    // console.log(hashmap);
+  }
+
+  transformExpenseDate(date:string) {
+    return this.datePipe.transform(date, 'dd/MMM/yyyy');
   }
 
   openBarChart(){
