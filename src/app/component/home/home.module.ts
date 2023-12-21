@@ -4,7 +4,6 @@ import { HomeComponent } from './home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/auth/auth.guard';
 import {
-  Confirm,
   ViewExpensesComponent,
 } from './view-expenses/view-expenses.component';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -24,7 +23,6 @@ const routes: Routes = [
   declarations: [
     HomeComponent,
     ViewExpensesComponent,
-    Confirm,
     ViewSingleComponent,
     ShowChartComponent,
   ],

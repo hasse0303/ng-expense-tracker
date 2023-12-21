@@ -20,12 +20,14 @@ import { DatePipe } from '@angular/common';
 export class ViewExpensesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = [
+    'no',
     'name',
     'amount',
     'expense_date',
     'expense_category',
     'payment',
     'comment',
+    'action'
   ];
 
   ELEMENT_DATA: ExpenseContent[] = [];
@@ -178,59 +180,22 @@ export class ViewExpensesComponent implements OnInit {
       height: '450px',
     });
   }
-
-  //logic ends
-
-  onOpen(element: any) {
-    this.openDialog();
-    let body = {
-      action: 'edit',
-      data: element,
-    };
-    this.businessData.data = body;
-  }
-  openDialog(): void {
-    let dialogRef = this.dialog.open(Confirm, {
-      width: '300px',
-      height: '190px',
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      if(result==="delete") {
-        // this.isDelete=true;
-        this.getAllExpense(this.userId);
-      }
-    });
-  }
-}
-
-@Component({
-  selector: 'confirm',
-  templateUrl: 'confirm.html',
-})
-export class Confirm{
-  constructor(
-    public dialogRef: MatDialogRef<Confirm>,
-    public dialog: MatDialog,
-    public businessData: BusinessDataService,
-    public route: Router,
-    public _snackBar:MatSnackBar
-  ) {}
-
-  onOpen() {
-    this.route.navigate(['edit', this.businessData.data.data._id]);
+  editExpense(id: string) {
+    this.route.navigate(['edit', id]);
   }
 
-  onDelete() {
+  deleteExpense(id: string) {
     this.businessData
-      .onDeleteExpense(this.businessData.data.data._id)
+      .onDeleteExpense(id)
       .subscribe((res: any) => {
         this._snackBar.open(res.message,'',{duration:2000});
+        this.getAllExpense(this.userId);
       });
   }
 
-  onView(){
+  viewSummary(id: string){
     let tableData;
-    this.businessData.onGetSingleExpense(this.businessData.data.data._id).subscribe((res: any) => {
+    this.businessData.onGetSingleExpense(id).subscribe((res: any) => {
       tableData=res.data;
       let dialogRef = this.dialog.open(ViewSingleComponent, {
         width: '300px',
@@ -242,3 +207,4 @@ export class Confirm{
     });
   }
 }
+

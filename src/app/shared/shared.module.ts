@@ -18,6 +18,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -48,6 +49,7 @@ import { WelcomeLoaderComponent } from './welcome-loader/welcome-loader.componen
     MatTabsModule,
     MatChipsModule,
     MatSnackBarModule,
+    MatMenuModule,
     MatFormFieldModule,
     MatDialogModule,
     MatPaginatorModule,
@@ -77,6 +79,7 @@ import { WelcomeLoaderComponent } from './welcome-loader/welcome-loader.componen
     MatTabsModule,
     MatChipsModule,
     MatSnackBarModule,
+    MatMenuModule,
     MatFormFieldModule,
     MatDialogModule,
     MatPaginatorModule,
