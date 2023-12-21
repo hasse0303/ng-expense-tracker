@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class BusinessDataService {
-  
+
   isLogging: boolean = false;
   isChecking:boolean=false;
   hashmap:any={};
@@ -37,12 +37,12 @@ export class BusinessDataService {
     return this.http.get(this.apiUrl + 'GET_ALL_EXPENSE/'+id);
   }
 
-  onCreateExpense(values: any,date:any) {
+  onCreateExpense(values: any) {
     let id=localStorage.getItem('Id')?.split(' ')[1];
     let body={
       name: values.name,
       amount: values.amount,
-      expense_date: (date[0]+' '+date[1]+' '+date[2]+' '+date[3]),
+      expense_date: values.expense_date,
       expense_category: values.expense_category,
       payment: values.payment,
       comment: values.comment,
@@ -73,7 +73,7 @@ export class BusinessDataService {
   onCreateCategory(body:any){
     return this.http.post(this.apiUrl+'SAVE_CATEGORY/'+this.userId,body);
   }
-  
+
   onDeleteExpense(id:string){
     return this.http.delete(this.apiUrl+'DELETE_EXPENSE/'+this.userId+'/'+id);
   }
@@ -88,7 +88,7 @@ export class BusinessDataService {
     let body={
       name: values.name,
       amount: values.amount,
-      expense_date: (date[0]+' '+date[1]+' '+date[2]+' '+date[3]),
+      expense_date: values.expense_date,
       expense_category: values.expense_category,
       payment: values.payment,
       comment: values.comment,

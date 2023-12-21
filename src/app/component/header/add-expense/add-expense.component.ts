@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { ThemeService } from 'ng2-charts';
@@ -10,10 +10,9 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
   styleUrls: ['./add-expense.component.scss'],
 })
 export class AddExpenseComponent implements OnInit {
-  expenseForm!: FormGroup;
+  expenseForm: FormGroup;
   isEdit: boolean = false;
   filled:boolean=true;
-  date: any;
   showLoader:boolean=false;
   id: any;
   maxDate :any=new Date();
@@ -39,21 +38,15 @@ export class AddExpenseComponent implements OnInit {
     public businessData: BusinessDataService,
     private _snackBar: MatSnackBar,
     private activateRoute: ActivatedRoute,
-    public route: Router
+    public route: Router,
+    private fb: FormBuilder
   ) {}
   ngOnInit(): void {
     this.isSaving=false;
     this.businessData.onGetAllCategory().subscribe((res:any)=>{
       this.keywords=res.data;
     })
-    this.expenseForm = new FormGroup({
-      name: new FormControl('', [Validators.required,Validators.maxLength(50),Validators.pattern('^[a-zA-Z ]*$')]),
-      amount: new FormControl('', Validators.required),
-      expense_category: new FormControl('', Validators.required),
-      payment: new FormControl('', Validators.required),
-      expense_date: new FormControl('', Validators.required),
-      comment: new FormControl(''),
-    });
+    this.initForm();
     this.activateRoute.paramMap.subscribe((param: ParamMap) => {
       if (param.has('id')) {
         this.isEdit = true;
@@ -63,6 +56,17 @@ export class AddExpenseComponent implements OnInit {
       else{
         this.isEdit=false;
       }
+    });
+  }
+
+  initForm() {
+    this.expenseForm = this.fb.group({
+      name: ['', [Validators.required,Validators.maxLength(50),Validators.pattern('^[a-zA-Z ]*$')]],
+      amount: ['', Validators.required],
+      expense_category: ['', Validators.required],
+      payment: ['', Validators.required],
+      expense_date: [new Date(), Validators.required],
+      comment: [''],
     });
   }
   prePopulate() {
@@ -75,7 +79,7 @@ export class AddExpenseComponent implements OnInit {
       this.expenseForm.setValue({
         name: res.data.name,
         amount: res.data.amount,
-        expense_date: new Date(year, month, day),
+        expense_date: res.data.expense_date,
         expense_category: res.data.expense_category,
         payment: res.data.payment,
         comment: res.data.comment,
@@ -94,15 +98,11 @@ export class AddExpenseComponent implements OnInit {
     // this.expenseForm.markAllAsTouched();
   }
 
-  addEvent(event: any) {
-    let str = event.value.toString();
-    this.date = str.split(' ');
-  }
-
   onSaveExpense() {
     this.isSaving=true;
+    this.transformExpenseDate();
     this.businessData
-      .onCreateExpense(this.expenseForm.value, this.date)
+      .onCreateExpense(this.expenseForm.value)
       .subscribe((res: any) => {
         this.isSaving=false;
         if (res.status === true) {
@@ -118,6 +118,7 @@ export class AddExpenseComponent implements OnInit {
       });
   }
   onEdit() {
+    this.transformExpenseDate();
     this.businessData
       .onUpdateExpense(this.id, this.expenseForm.value)
       .subscribe((res) => {
@@ -130,6 +131,10 @@ export class AddExpenseComponent implements OnInit {
         }
         this.route.navigate(['dashboard']);
       });
+  }
+
+  transformExpenseDate() {
+    this.expenseForm.patchValue({expense_date: this.expenseForm.value.expense_date.toISOString()});
   }
   onCancel() {
     this.route.navigate(['dashboard']);

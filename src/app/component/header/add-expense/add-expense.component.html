@@ -75,7 +75,7 @@
           <div class="col-sm-6">
             <mat-form-field appearance="outline" style="width: 100%">
               <mat-label>Choose a Expense date</mat-label>
-              <input matInput [max]="maxDate"  [matDatepicker]="picker" formControlName="expense_date" (dateChange)="addEvent($event)" />
+              <input matInput [max]="maxDate"  [matDatepicker]="picker" formControlName="expense_date" />
               <mat-hint
                 *ngIf="
                   expenseForm.get('expense_date')?.errors &&

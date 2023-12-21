@@ -27,18 +27,18 @@ export class ProfileComponent implements OnInit{
         this.isProcess=false;
         this.editable=true;
       }, 1000);
-      let firstDate=(res.data.firstLoginDate).toString().split('T')[0];
-      let lastLogin=(res.data.lastLoginDate).toString().split('T')[0];
+      let firstDate=res.data.firstLoginDate;
+      let lastLogin=res.data.lastLoginDate;
       this.lines=[
-        {content:'User Since',text:firstDate},
+        {content:'User Since', type: 'date', text:firstDate},
         {content:'Expense Logged',text:res.data.expenseLogged},
-        {content:'Last Login',text:lastLogin},
+        {content:'Last Login', type: 'date', text:lastLogin},
       ];
       this.name=res.data.name;
       this.user_name=res.data.username;
       this.newName=res.data.name;
       this.newUsername=res.data.username;
-    })    
+    })
   }
   editField(){
     this.isEdit=!this.isEdit;

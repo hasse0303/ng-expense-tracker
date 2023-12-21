@@ -73,11 +73,13 @@ export class ViewExpensesComponent implements OnInit {
       this.cards = [
         {
           icon: 'today',
+          type: 'date',
           title: 'First Expense Date',
           content: (len>0)?(res.data[0].expense_date):'-',
         },
         {
           icon: 'today',
+          type: 'date',
           title: 'Latest Expense Date',
           content: (len>0)?(res.data[res.data.length - 1].expense_date):'-',
         },
@@ -86,7 +88,7 @@ export class ViewExpensesComponent implements OnInit {
           title: 'Number of Expenses',
           content: len,
         },
-        { icon: 'monetization_on', title: 'Total Amount', content: this.count },
+        { icon: 'monetization_on', type: 'currency', title: 'Total Amount', content: this.count },
       ];
       this.allexpense=len;
       this.businessData.expensesLogged=this.allexpense;
