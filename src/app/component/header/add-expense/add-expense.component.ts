@@ -92,10 +92,7 @@ export class AddExpenseComponent implements OnInit {
   }
 
   onReset() {
-    this.expenseForm.reset();
-    this.expenseForm.markAsUntouched();
-    // console.log(this.expenseForm);
-    // this.expenseForm.markAllAsTouched();
+    this.initForm();
   }
 
   onSaveExpense() {
