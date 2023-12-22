@@ -5,9 +5,9 @@ const router = express.Router();
 
 const UserModel=require('../models/userModel');
 
-// const authMiddleware=require('../middleware/expenseMiddleWare');
+const authMiddleware=require('../middleware/expenseMiddleWare');
 
-router.delete("/DELETE_EXPENSE/:userId/:id", (req, res, next) => {
+router.delete("/DELETE_EXPENSE/:userId/:id", authMiddleware, (req, res, next) => {
   UserModel.findOneAndUpdate(
     { _id: req.params.userId },
     { $pull: { expenses: { _id: req.params.id } } },
@@ -20,7 +20,7 @@ router.delete("/DELETE_EXPENSE/:userId/:id", (req, res, next) => {
   });
 });
 
-router.get("/GET_SINGLE_EXPENSE/:userId/:id", (req, res, next) => {
+router.get("/GET_SINGLE_EXPENSE/:userId/:id",authMiddleware, (req, res, next) => {
   UserModel.findOne({ _id: req.params.userId, 'expenses._id': req.params.id }, { 'expenses.$': 1 }).then((user)=>{
     res.status(200).json({
       message:'Fetch one',
@@ -36,7 +36,7 @@ router.get("/GET_SINGLE_EXPENSE/:userId/:id", (req, res, next) => {
   })
 });
 
-router.patch("/UPDATE_EXPENSE/:userId/:id", (req, res, next) => {
+router.patch("/UPDATE_EXPENSE/:userId/:id",authMiddleware, (req, res, next) => {
   UserModel.findOneAndUpdate({ _id: req.params.userId, 'expenses._id': req.params.id },
    {$set:{
     'expenses.$':req.body
@@ -53,7 +53,7 @@ router.patch("/UPDATE_EXPENSE/:userId/:id", (req, res, next) => {
   );
 });
 
-router.get("/GET_ALL_EXPENSE/:id",(req, res, next) => {
+router.get("/GET_ALL_EXPENSE/:id", authMiddleware,(req, res, next) => {
   UserModel.findOne({_id:req.params.id}).then((documents) => {
     // console.log(documents);
     res.status(200).json({
@@ -70,7 +70,7 @@ router.get("/GET_ALL_EXPENSE/:id",(req, res, next) => {
   // next();
 }); // take a func next is important function as this tell the code to execute next block also not end here
 
-router.post("/CREATE_EXPENSE", (req, res, next) => {
+router.post("/CREATE_EXPENSE", authMiddleware, (req, res, next) => {
   // req body how to use so we install body-parser
   const newExpense = new CreateExpense({
     name: req.body.name,
