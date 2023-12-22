@@ -148,6 +148,11 @@
 
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+                  <tr class="mat-row" class="no-record" *matNoDataRow>
+                    <td class="mat-cell" colspan="8">
+                        No Record
+                    </td>
+                </tr>
                 </table>
                 </div>
                 <mat-paginator [pageSizeOptions]="[5, 10]"
