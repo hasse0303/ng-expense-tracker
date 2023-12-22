@@ -55,12 +55,11 @@ export class BusinessDataService {
   onImportExpense(values:any){
     let id=localStorage.getItem('Id')?.split(' ')[1];
     let date=values.expense_date.split('/');
-    date=(new Date(date[2],date[1]-1,date[0])).toString();
-    date=date.split(' ');
+    date=(new Date(date[2],date[1]-1,date[0])).toISOString();
     let body={
       name: values.expense_name,
       amount: values.amount,
-      expense_date: (date[0]+' '+date[1]+' '+date[2]+' '+date[3]),
+      expense_date: date,
       expense_category: values.expense_category,
       payment: values.payment_type,
       comment: values.comment,
