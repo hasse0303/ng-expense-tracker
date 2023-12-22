@@ -60,7 +60,20 @@
   <div class="row row-col-1">
     <div class="col col-xs-12 col-sm-12">
       <mat-card>
-        <mat-card-title style="padding: 10px 20px;">Expense List</mat-card-title>
+        <mat-card-title style="padding: 10px 20px;">
+          <div class="expense-list-title">
+            <div>Expense List</div>
+            <button
+            (click)="onAdd()"
+            matTooltip="Add Expense"
+            class="btns"
+            mat-mini-fab
+            color="accent"
+          >
+            <mat-icon>add-chart</mat-icon>
+          </button>
+          </div>
+        </mat-card-title>
         <mat-card-content class="tableContent">
           <div style="margin: 0px 8px; margin-bottom: 20px;">
             <div class="mat-elevation-z8">

@@ -180,6 +180,9 @@ export class ViewExpensesComponent implements OnInit {
       height: '450px',
     });
   }
+  onAdd() {
+    this.businessData.onNavigate('home');
+  }
   editExpense(id: string) {
     this.route.navigate(['edit', id]);
   }
